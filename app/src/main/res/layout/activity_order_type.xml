@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/orderTypeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center|start" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnTakeOut"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="16dp"
+            android:backgroundTint="#3F51B5"
+            android:text="Take out"
+            android:textSize="16sp"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/fastfood_takeout_icon"
+            app:iconSize="56dp" />
+
+        <Button
+            android:id="@+id/btnDineIn"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="16dp"
+            android:backgroundTint="#DBA82C"
+            android:text="Dine In"
+            android:textSize="16sp"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/baseline_fastfood_24"
+            app:iconSize="56dp" />
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_gravity="end" />
+
+</LinearLayout>

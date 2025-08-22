@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="Checkout"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/checkoutRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/checkoutTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:gravity="end"/>
+
+    <TextView
+        android:id="@+id/paymentMethodLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Choose Payment Method:"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp" />
+
+    <LinearLayout
+        android:id="@+id/paymentButtonsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnCash"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:backgroundTint="#FFD54F"
+            android:text="Cash"
+            android:textColor="#000000"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/cash_svgrepo_com"
+            app:iconSize="30dp"
+            app:iconTint="#000000" />
+
+        <Button
+            android:id="@+id/btnQRIS"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:backgroundTint="#4FC3F7"
+            android:text="QRIS"
+            android:textColor="#000000"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/baseline_qr_code_scanner_24"
+            app:iconSize="30dp"
+            app:iconTint="#000000" />
+
+        <Button
+            android:id="@+id/btnDebit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_weight="1"
+            android:backgroundTint="#A5D6A7"
+            android:text="Debit"
+            android:textColor="#000000"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/baseline_credit_card_24"
+            app:iconSize="30dp"
+            app:iconTint="#000000" />
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnConfirmOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm Order"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#388E3C"
+        android:textColor="#FFFFFF"/>
+
+
+</LinearLayout>
