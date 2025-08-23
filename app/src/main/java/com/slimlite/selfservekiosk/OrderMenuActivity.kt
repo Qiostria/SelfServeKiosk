@@ -109,15 +109,12 @@ class OrderMenuActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickLi
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_menu)
 
-        // ⬇️ Get the order type from SharedPreferences
         val sharedPref = getSharedPreferences("KioskPrefs", MODE_PRIVATE)
         val orderType = sharedPref.getString("order_type", "No Type Selected")
-
-        // ⬇️ Set it into the TextView
         val orderTypeTextView = findViewById<TextView>(R.id.OrderType)
         orderTypeTextView.text = orderType
 
-        // continue with your existing setup...
+
         initViews()
         setupCategories()
         setupMenuItems()
@@ -126,7 +123,7 @@ class OrderMenuActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickLi
         filterMenuByCategory("All")
 
         val cartButton = findViewById<Button>(R.id.btnCart)
-        cartButton.isEnabled = CartManager.cartItems.isNotEmpty() // Disable if cart is empty
+        cartButton.isEnabled = CartManager.cartItems.isNotEmpty()
 
         cartButton.setOnClickListener {
             val bottomSheet = CartBottomSheetFragment.newInstance(CartManager.cartItems)
@@ -230,11 +227,12 @@ class OrderMenuActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickLi
     private fun updateMenuGrid() {
         menuGrid.adapter = MenuItemAdapter(this, filteredMenuItems) { selectedItem ->
             CartManager.cartItems.add(selectedItem)
-            Toast.makeText(this, "${selectedItem.name} added to cart", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "${selectedItem.name} added to cart", Toast.LENGTH_SHORT).show()
 
-            // Enable cart button since there’s now an item
+            //Enables cart button on item added to cart
             val cartButton = findViewById<Button>(R.id.btnCart)
             cartButton.isEnabled = true
+            //HW: Add remove item button on bottom Cart Sheet
         }
     }
 
