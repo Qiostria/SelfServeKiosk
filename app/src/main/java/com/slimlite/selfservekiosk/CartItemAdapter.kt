@@ -18,7 +18,7 @@ class CartItemAdapter(private val items: List<MenuItem>) : RecyclerView.Adapter<
             .inflate(android.R.layout.simple_list_item_2, parent, false)
         return CartViewHolder(view)
     }
-
+// chnge 1
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val item = items[position]
         holder.itemName.text = item.name
