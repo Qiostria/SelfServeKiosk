@@ -20,24 +20,24 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-// Data classes
 data class Category(
     val name: String,
     var isSelected: Boolean = false
 )
 
-// updated 20/06/2025
+
 data class MenuItem(
     val name: String,
     val category: String,
     val price: Double,
     val description: String = "",
-    val imageResId: Int = 0 // ← Add this line
+    val imageResId: Int = 0,
+    var quantity: Int = 1
 )
 
 private val cartItems = mutableListOf<MenuItem>()
 
-// Category Adapter
+
 class CategoryAdapter(
     private val categories: List<Category>,
     private val listener: OnCategoryClickListener
@@ -47,7 +47,7 @@ class CategoryAdapter(
         fun onCategoryClick(categoryName: String, position: Int)
     }
 
-    private var selectedPosition = 0 // Track selected category
+    private var selectedPosition = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -85,7 +85,8 @@ class CategoryAdapter(
         fun bind(category: Category, isSelected: Boolean) {
             categoryName.text = category.name
 
-            // Change appearance based on selection
+
+            //HW: Add more color variations on color.xml
             if (isSelected) {
                 itemView.setBackgroundResource(R.drawable.selected_category_bg)
                 categoryName.setTextColor(Color.WHITE)
@@ -184,7 +185,6 @@ class OrderMenuActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickLi
             layoutManager = LinearLayoutManager(this@OrderMenuActivity, LinearLayoutManager.HORIZONTAL, false)
             adapter = categoryAdapter
 
-            // Add spacing between items
             addItemDecoration(object : RecyclerView.ItemDecoration() {
                 private val space = 16
                 override fun getItemOffsets(outRect: android.graphics.Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
@@ -226,15 +226,20 @@ class OrderMenuActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickLi
 
     private fun updateMenuGrid() {
         menuGrid.adapter = MenuItemAdapter(this, filteredMenuItems) { selectedItem ->
-            CartManager.cartItems.add(selectedItem)
-            //Toast.makeText(this, "${selectedItem.name} added to cart", Toast.LENGTH_SHORT).show()
 
-            //Enables cart button on item added to cart
+            val existingItem = CartManager.cartItems.find { it.name == selectedItem.name }
+            if (existingItem != null) {
+                existingItem.quantity += 1
+            } else {
+                val newItem = selectedItem.copy(quantity = 1)
+                CartManager.cartItems.add(newItem)
+            }
+
             val cartButton = findViewById<Button>(R.id.btnCart)
             cartButton.isEnabled = true
-            //HW: Add remove item button on bottom Cart Sheet
         }
     }
+
 
     private fun showCancelConfirmation() {
         AlertDialog.Builder(this)

@@ -1,6 +1,8 @@
 package com.slimlite.selfservekiosk
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -9,6 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+
+// HW: FIX EDITABLE CHECKOUT BUG
+// HW: FIX MISSING CHECKOUT PRICE ON FIRST LAUNCH
+// HW: GET SOME SLEEP
+
 
 class CheckoutActivity : AppCompatActivity() {
     private var selectedPayment: String? = null
@@ -22,10 +29,8 @@ class CheckoutActivity : AppCompatActivity() {
         val totalText = findViewById<TextView>(R.id.checkoutTotal)
         val confirmButton = findViewById<Button>(R.id.btnConfirmOrder)
         confirmButton.setOnClickListener {
-            // Clear SharedPreferences if needed
-            getSharedPreferences("KioskPrefs", MODE_PRIVATE).edit().clear().apply()
 
-            // Optionally clear cart
+            getSharedPreferences("KioskPrefs", MODE_PRIVATE).edit().clear().apply()
             CartManager.cartItems.clear()
 
             getSharedPreferences("KioskPrefs", MODE_PRIVATE).edit().clear().apply()
@@ -37,10 +42,10 @@ class CheckoutActivity : AppCompatActivity() {
 
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = CartItemAdapter(cartItems)
-
-        val total = cartItems.sumOf { it.price }
-        totalText.text = String.format("Total: $%.2f", total)
+        recyclerView.adapter = CartItemAdapter(cartItems) {
+            val total = cartItems.sumOf { it.price }
+            totalText.text = String.format("Total: $%.2f", total)
+        }
 
         val btnCash = findViewById<Button>(R.id.btnCash)
         val btnQRIS = findViewById<Button>(R.id.btnQRIS)
@@ -51,7 +56,8 @@ class CheckoutActivity : AppCompatActivity() {
 
 
         fun highlightSelected(selected: Button) {
-            paymentButtons.forEach { it.setBackgroundTintList(null) }
+            paymentButtons.forEach { it.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#DADADA"))) }
+            //paymentButtons.forEach { it.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#DADADA"))) }
             selected.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.orange))
         }
 

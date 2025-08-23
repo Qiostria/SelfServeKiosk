@@ -36,18 +36,25 @@ class CartBottomSheetFragment : BottomSheetDialogFragment() {
         val totalText = view.findViewById<TextView>(R.id.cartTotal)
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = CartItemAdapter(cartList)
 
-        val total = cartList.sumOf { it.price }
-        totalText.text = String.format("Total: $%.2f", total)
+        val adapter = CartItemAdapter(cartList) { updatedItems ->
+            val total = updatedItems.sumOf { it.price * it.quantity }
+            totalText.text = String.format("Total: $%.2f", total)
+        }
+
+        recyclerView.adapter = adapter
+
+        // initial total
+        val initialTotal = cartList.sumOf { it.price * it.quantity }
+        totalText.text = String.format("Total: $%.2f", initialTotal)
 
         view.findViewById<Button>(R.id.btnCheckout).setOnClickListener {
             val intent = Intent(requireContext(), CheckoutActivity::class.java)
             startActivity(intent)
-            dismiss() // close bottom sheet
+            dismiss()
         }
-
     }
+
 
 
 }
