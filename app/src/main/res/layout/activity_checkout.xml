@@ -18,31 +18,35 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/checkoutRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginTop="8dp"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" />
 
     <TextView
         android:id="@+id/checkoutTotal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:layout_gravity="bottom|end"
         android:layout_marginTop="8dp"
-        android:gravity="end"/>
+        android:gravity="end"
+        android:text="Total"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/paymentMethodLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginTop="16dp"
         android:text="Choose Payment Method:"
-        android:textStyle="bold"
         android:textSize="16sp"
-        android:layout_marginTop="16dp" />
+        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/paymentButtonsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:orientation="horizontal">
@@ -96,10 +100,16 @@
         android:id="@+id/btnConfirmOrder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Confirm Order"
+        android:layout_gravity="bottom|end"
         android:layout_marginTop="16dp"
         android:backgroundTint="#388E3C"
-        android:textColor="#FFFFFF"/>
+        android:text="Confirm Order"
+        android:textColor="#FFFFFF" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_gravity="bottom|end" />
 
 
 </LinearLayout>

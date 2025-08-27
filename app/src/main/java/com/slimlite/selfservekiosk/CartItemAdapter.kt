@@ -7,51 +7,49 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class CartItemAdapter(
-    private val items: MutableList<MenuItem>,
-    private val onCartUpdated: (List<MenuItem>) -> Unit
-) : RecyclerView.Adapter<CartItemAdapter.CartViewHolder>() {
+class CartItemAdapter(private val items: List<MenuItem>,
+    private val readOnly: Boolean = false,
+    private val onCartUpdated: (() -> Unit)? = null
+) : RecyclerView.Adapter<CartItemAdapter.ViewHolder>() {
 
-    inner class CartViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val itemName: TextView = view.findViewById(R.id.tvItemName)
-        val itemPrice: TextView = view.findViewById(R.id.tvItemPrice)
-        val btnIncrease: Button = view.findViewById(R.id.btnIncrease)
-        val btnDecrease: Button = view.findViewById(R.id.btnDecrease)
-        val tvQuantity: TextView = view.findViewById(R.id.tvQuantity)
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val name = view.findViewById<TextView>(R.id.itemName)
+        val price = view.findViewById<TextView>(R.id.itemPrice)
+        val quantity = view.findViewById<TextView>(R.id.itemQuantity)
+        val btnAdd = view.findViewById<Button>(R.id.btnAdd)
+        val btnRemove = view.findViewById<Button>(R.id.btnRemove)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_cart, parent, false)
-        return CartViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_cart, parent, false)
+        return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
+        holder.name.text = item.name
+        holder.price.text = "Rp ${item.price}"
+        holder.quantity.text = "x${item.quantity}"
 
-        holder.itemName.text = item.name
-        holder.itemPrice.text = String.format("$%.2f", item.price * item.quantity)
-        holder.tvQuantity.text = item.quantity.toString()
-
-        holder.btnIncrease.setOnClickListener {
-            item.quantity++
-            notifyItemChanged(position)
-            onCartUpdated(items)
-        }
-
-        holder.btnDecrease.setOnClickListener {
-            if (item.quantity > 1) {
-                item.quantity--
+        if (readOnly) {
+            holder.btnAdd.visibility = View.GONE
+            holder.btnRemove.visibility = View.GONE
+        } else {
+            holder.btnAdd.setOnClickListener {
+                item.quantity++
                 notifyItemChanged(position)
-            } else {
-                // Remove item completely if quantity = 0
-                items.removeAt(position)
-                notifyItemRemoved(position)
-                notifyItemRangeChanged(position, items.size)
+                onCartUpdated?.invoke()
             }
-            onCartUpdated(items)
+            holder.btnRemove.setOnClickListener {
+                if (item.quantity > 0) {
+                    item.quantity--
+                    notifyItemChanged(position)
+                    onCartUpdated?.invoke()
+                }
+            }
         }
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount() = items.size
 }
+

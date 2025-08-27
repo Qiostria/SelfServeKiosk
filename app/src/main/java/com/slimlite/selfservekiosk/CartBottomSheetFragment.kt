@@ -37,10 +37,12 @@ class CartBottomSheetFragment : BottomSheetDialogFragment() {
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val adapter = CartItemAdapter(cartList) { updatedItems ->
-            val total = updatedItems.sumOf { it.price * it.quantity }
-            totalText.text = String.format("Total: $%.2f", total)
+        val adapter = CartItemAdapter(cartList, readOnly = false) {
+            val newTotal = cartList.sumOf { it.price * it.quantity }
+            totalText.text = String.format("Total: Rp %.2f", newTotal)
         }
+        recyclerView.adapter = adapter
+
 
         recyclerView.adapter = adapter
 
