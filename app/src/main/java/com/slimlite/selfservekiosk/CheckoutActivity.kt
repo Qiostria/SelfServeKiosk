@@ -12,9 +12,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-// DONE: FIX EDITABLE CHECKOUT BUG
+// HW: FIX EDITABLE CHECKOUT BUG
 // HW: FIX MISSING CHECKOUT PRICE ON FIRST LAUNCH
-// HW: FIX CHECKOUT PRICE NOT CALCULATING TOTAL QUANTITY OF ITEM
 // HW: GET SOME SLEEP
 
 
@@ -25,14 +24,8 @@ class CheckoutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_checkout)
 
-        val cartItems = CartManager.getCartItems()
-        val adapter = CheckoutItemAdapter(MenuItem)
-
+        val cartItems = CartManager.cartItems
         val recyclerView = findViewById<RecyclerView>(R.id.checkoutRecyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        recyclerView.adapter = adapter
-
         val totalText = findViewById<TextView>(R.id.checkoutTotal)
         val confirmButton = findViewById<Button>(R.id.btnConfirmOrder)
         confirmButton.setOnClickListener {
@@ -46,7 +39,6 @@ class CheckoutActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
 
 
         recyclerView.layoutManager = LinearLayoutManager(this)
