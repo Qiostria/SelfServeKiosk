@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.text.NumberFormat
+import java.util.Locale
 
 class CheckoutItemAdapter(private val items: List<MenuItem>) :
     RecyclerView.Adapter<CheckoutItemAdapter.CheckoutViewHolder>() {
@@ -23,9 +25,15 @@ class CheckoutItemAdapter(private val items: List<MenuItem>) :
     override fun onBindViewHolder(holder: CheckoutViewHolder, position: Int) {
         val item = items[position]
         holder.itemName.text = "${item.name} x${item.quantity}"
-        holder.itemPrice.text = String.format("$%.2f", item.price * item.quantity)
+        holder.itemPrice.text = formatRupiah(item.price * item.quantity)
     }
 
     override fun getItemCount(): Int = items.size
+
+    private fun formatRupiah(value: Double): String {
+        val localeID = Locale("in", "ID")
+        val formatter = NumberFormat.getCurrencyInstance(localeID)
+        return formatter.format(value)
+    }
 }
 

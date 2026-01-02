@@ -152,29 +152,29 @@ class OrderMenuActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickLi
     private fun setupMenuItems() {
         allMenuItems = mutableListOf<MenuItem>().apply {
             // Appetizers
-            add(MenuItem(1, "Caesar Salad", "Appetizers", 8.99, "Fresh romaine lettuce with caesar dressing", R.drawable.caesar_salad))
-            add(MenuItem(2, "Spring Rolls", "Appetizers", 6.99, "Crispy vegetable spring rolls", R.drawable.spring_rolls))
-            add(MenuItem(3, "Chicken Wings", "Appetizers", 9.99, "Buffalo style chicken wings", R.drawable.grilled_chicken))
+            add(MenuItem(1, "Caesar Salad", "Appetizers", 89000.0, "Fresh romaine lettuce with caesar dressing", R.drawable.caesar_salad))
+            add(MenuItem(2, "Spring Rolls", "Appetizers", 69000.0, "Crispy vegetable spring rolls", R.drawable.spring_rolls))
+            add(MenuItem(3, "Chicken Wings", "Appetizers", 99000.0, "Buffalo style chicken wings", R.drawable.grilled_chicken))
 
             // Main Course
-            add(MenuItem(4, "Grilled Chicken", "Main Course", 15.99, "Herb-seasoned grilled chicken breast", R.drawable.grilled_chicken))
-            add(MenuItem(5, "Beef Steak", "Main Course", 24.99, "Premium cut beef steak", R.drawable.beef_steak))
-            add(MenuItem(6, "Fish & Chips", "Main Course", 12.99, "Beer battered fish with fries", R.drawable.fish_and_chips))
-            add(MenuItem(7, "Pasta Carbonara", "Main Course", 13.99, "Creamy pasta with bacon", R.drawable.spaghetti_carbonara))
+            add(MenuItem(4, "Grilled Chicken", "Main Course", 159000.0, "Herb-seasoned grilled chicken breast", R.drawable.grilled_chicken))
+            add(MenuItem(5, "Beef Steak", "Main Course", 249000.0, "Premium cut beef steak", R.drawable.beef_steak))
+            add(MenuItem(6, "Fish & Chips", "Main Course", 129000.0, "Beer battered fish with fries", R.drawable.fish_and_chips))
+            add(MenuItem(7, "Pasta Carbonara", "Main Course", 139000.0, "Creamy pasta with bacon", R.drawable.spaghetti_carbonara))
 
             // Desserts
-            add(MenuItem(8, "Chocolate Cake", "Desserts", 6.99, "Rich chocolate layer cake", R.drawable.chocolate_cake))
-            add(MenuItem(9, "Ice Cream", "Desserts", 4.99, "Vanilla ice cream with toppings", R.drawable.ice_cream))
-            add(MenuItem(10, "Cheesecake", "Desserts", 7.99, "New York style cheesecake", R.drawable.chocolate_cake))
+            add(MenuItem(8, "Chocolate Cake", "Desserts", 69000.0, "Rich chocolate layer cake", R.drawable.chocolate_cake))
+            add(MenuItem(9, "Ice Cream", "Desserts", 49000.0, "Vanilla ice cream with toppings", R.drawable.ice_cream))
+            add(MenuItem(10, "Cheesecake", "Desserts", 79000.0, "New York style cheesecake", R.drawable.chocolate_cake))
 
             // Beverages
-            add(MenuItem(11, "Coffee", "Beverages", 3.99, "Freshly brewed coffee", R.drawable.coffee))
-            add(MenuItem(12, "Orange Juice", "Beverages", 2.99, "Fresh squeezed orange juice", R.drawable.orange_juice))
-            add(MenuItem(13, "Soft Drinks", "Beverages", 1.99, "Coke, Pepsi, Sprite", R.drawable.soft_drink))
+            add(MenuItem(11, "Coffee", "Beverages", 39000.0, "Freshly brewed coffee", R.drawable.coffee))
+            add(MenuItem(12, "Orange Juice", "Beverages", 29000.0, "Fresh squeezed orange juice", R.drawable.orange_juice))
+            add(MenuItem(13, "Soft Drinks", "Beverages", 19000.0, "Coke, Pepsi, Sprite", R.drawable.soft_drink))
 
             // Snacks
-            add(MenuItem(14, "French Fries", "Snacks", 4.99, "Crispy golden fries", R.drawable.french_fries))
-            add(MenuItem(15, "Onion Rings", "Snacks", 5.99, "Beer battered onion rings", R.drawable.onion_rings))
+            add(MenuItem(14, "French Fries", "Snacks", 49000.0, "Crispy golden fries", R.drawable.french_fries))
+            add(MenuItem(15, "Onion Rings", "Snacks", 59000.0, "Beer battered onion rings", R.drawable.onion_rings))
         }
 
         filteredMenuItems = allMenuItems.toMutableList()

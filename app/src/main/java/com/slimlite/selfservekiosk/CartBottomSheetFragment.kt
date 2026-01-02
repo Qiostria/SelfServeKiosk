@@ -13,6 +13,8 @@ import com.slimlite.selfservekiosk.CartManager
 import com.slimlite.selfservekiosk.CheckoutActivity
 import com.slimlite.selfservekiosk.MenuItem
 import com.slimlite.selfservekiosk.R
+import java.text.NumberFormat
+import java.util.Locale
 
 class CartBottomSheetFragment : BottomSheetDialogFragment() {
 
@@ -31,24 +33,31 @@ class CartBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val cartList = arguments?.getSerializable("cart") as? ArrayList<MenuItem> ?: arrayListOf()
+        val cartList = CartManager.cartItems
+
+
         val recyclerView = view.findViewById<RecyclerView>(R.id.cartRecyclerView)
         val totalText = view.findViewById<TextView>(R.id.cartTotal)
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val adapter = CartItemAdapter(cartList, readOnly = false) {
-            val newTotal = cartList.sumOf { it.price * it.quantity }
-            totalText.text = String.format("Total: Rp %.2f", newTotal)
+        fun updateTotal() {
+            val total = cartList.sumOf { it.price * it.quantity }
+            totalText.text = "Total: ${formatRupiah(total)}"
         }
-        recyclerView.adapter = adapter
+
+        val adapter = CartItemAdapter(
+            items = CartManager.cartItems,
+            readOnly = false
+        ) {
+            updateTotal()
+        }
 
 
         recyclerView.adapter = adapter
 
         // initial total
-        val initialTotal = cartList.sumOf { it.price * it.quantity }
-        totalText.text = String.format("Total: $%.2f", initialTotal)
+        updateTotal()
 
         view.findViewById<Button>(R.id.btnCheckout).setOnClickListener {
             val intent = Intent(requireContext(), CheckoutActivity::class.java)
@@ -57,6 +66,9 @@ class CartBottomSheetFragment : BottomSheetDialogFragment() {
         }
     }
 
-
-
+    private fun formatRupiah(value: Double): String {
+        val localeID = Locale("in", "ID")
+        val formatter = NumberFormat.getCurrencyInstance(localeID)
+        return formatter.format(value)
+    }
 }

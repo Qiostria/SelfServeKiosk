@@ -14,6 +14,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import java.text.NumberFormat
+import java.util.Locale
 
 class MenuItemAdapter(
     private val context: Context,
@@ -74,7 +76,7 @@ class MenuItemAdapter(
         }
 
         val priceText = TextView(context).apply {
-            text = String.format("$%.2f", item.price)
+            text = formatRupiah(item.price)
             textSize = 14f
             gravity = Gravity.CENTER
             setTextColor(Color.parseColor("#F5A62E"))
@@ -100,6 +102,11 @@ class MenuItemAdapter(
         }
 
         return itemLayout
+    }
+    private fun formatRupiah(value: Double): String {
+        val localeID = Locale("in", "ID")
+        val formatter = NumberFormat.getCurrencyInstance(localeID)
+        return formatter.format(value)
     }
 
 }
